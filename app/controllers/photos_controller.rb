@@ -1,30 +1,25 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: %i[ show edit update destroy ]
 
-  before_action :ensure_current_user_is_owner, only: [:edit, :update, :destroy]
-
-  def ensure_current_user_is_owner
-    if current_user != @photo.owner
-      redirect_back(fallback_location: root_url, alert: "You are not auhtorized for that!")
-    end
-  end
 
   # GET /photos or /photos.json
   def index
-    @photos = Photo.all
+    authorize @photos = Photo.all
   end
 
   # GET /photos/1 or /photos/1.json
   def show
+    authorize @photo
   end
 
   # GET /photos/new
   def new
-    @photo = Photo.new
+    authorize @photo = Photo.new
   end
 
   # GET /photos/1/edit
   def edit
+    authorize @photo
   end
 
   # POST /photos or /photos.json
@@ -58,7 +53,7 @@ class PhotosController < ApplicationController
 
   # DELETE /photos/1 or /photos/1.json
   def destroy
-    @photo.destroy
+    authorize @photo.destroy
     respond_to do |format|
       format.html { redirect_back fallback_location: root_url, notice: "Photo was successfully destroyed." }
       format.json { head :no_content }
@@ -76,4 +71,6 @@ class PhotosController < ApplicationController
   def photo_params
     params.require(:photo).permit(:image, :comments_count, :likes_count, :caption, :owner_id)
   end
+
+
 end
