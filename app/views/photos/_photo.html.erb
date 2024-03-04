@@ -25,8 +25,8 @@
   </div>
 
   <ul class="list-group list-group-flush">
-    <% photo.comments.each do |comment| %>
-      <%= render "comments/comment", comment: comment %>
+    <% photo.comments.each do |a_comment| %>
+      <%= render "comments/comment", comment: a_comment %>
     <% end %>
   </ul>
 
