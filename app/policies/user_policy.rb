@@ -1,4 +1,4 @@
-class UserPolicy
+class UserPolicy < ApplicationPolicy
   attr_reader :current_user, :user
 
 
@@ -8,10 +8,21 @@ class UserPolicy
   end
 
   def show?
-    user == current_user ||
-     !user.private? || 
-     user.followers.include?(current_user)
+    true
   end
 
+  def feed?
+    true
+  end
+
+  def discover?
+    true
+  end
+
+  def liked?
+    user == current_user ||
+    !user.private? || 
+    user.followers.include?(current_user)
+  end
 
 end

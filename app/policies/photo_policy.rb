@@ -16,7 +16,7 @@ class PhotoPolicy < ApplicationPolicy
     user == photo.owner
   end
 
-  def new?
+  def create?
     user
   end
 

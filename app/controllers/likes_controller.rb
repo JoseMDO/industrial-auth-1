@@ -1,13 +1,6 @@
 class LikesController < ApplicationController
   before_action :set_like, only: %i[ show edit update destroy ]
 
-  before_action :is_an_authprized_user, only: [:destroy, :create]
-
-  def is_an_authprized_user
-    if !@like.owner.private? || @like.owner == current_user || current_user.leaders.include?(@like.owner)
-      redirect_back(fallback_location: root_url, alert: "Not authorized")
-    end
-  end
 
   # GET /likes or /likes.json
   def index
@@ -29,7 +22,7 @@ class LikesController < ApplicationController
 
   # POST /likes or /likes.json
   def create
-    @like = Like.new(like_params)
+    authorize @like = Like.new(like_params)
 
     respond_to do |format|
       if @like.save
@@ -57,7 +50,7 @@ class LikesController < ApplicationController
 
   # DELETE /likes/1 or /likes/1.json
   def destroy
-    @like.destroy
+    authorize @like.destroy
     respond_to do |format|
       format.html { redirect_to likes_url, notice: "Like was successfully destroyed." }
       format.json { head :no_content }

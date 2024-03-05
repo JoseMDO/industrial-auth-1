@@ -24,7 +24,7 @@ class PhotosController < ApplicationController
 
   # POST /photos or /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    authorize @photo = Photo.new(photo_params)
     @photo.owner = current_user
 
     respond_to do |format|
@@ -40,6 +40,7 @@ class PhotosController < ApplicationController
 
   # PATCH/PUT /photos/1 or /photos/1.json
   def update
+    authorize @photo
     respond_to do |format|
       if @photo.update(photo_params)
         format.html { redirect_to @photo, notice: "Photo was successfully updated." }
