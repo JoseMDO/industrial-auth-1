@@ -17,7 +17,7 @@ class PhotoPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    true
   end
 
   def update?

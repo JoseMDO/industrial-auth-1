@@ -7,7 +7,7 @@ class FollowRequestPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    true
   end
 
   def update?
@@ -15,7 +15,7 @@ class FollowRequestPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user == follow_request.sender
+    update?
   end
 
 end

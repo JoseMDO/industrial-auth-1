@@ -4,9 +4,7 @@
   </div>
 </div>
 
-<% if @user == current_user ||
-    !@user.private? || 
-    @user.followers.include?(current_user) %>
+<% if policy(@user).show? %>
   <div class="row mb-2">
     <div class="col-md-6 offset-md-3">
       <%= render "users/profile_nav", user: @user %>
