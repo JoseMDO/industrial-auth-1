@@ -9,7 +9,6 @@ class PhotosController < ApplicationController
 
   # GET /photos/1 or /photos/1.json
   def show
-     @photo
   end
 
   # GET /photos/new
@@ -19,7 +18,6 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
-     @photo
   end
 
   # POST /photos or /photos.json
