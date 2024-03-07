@@ -7,10 +7,10 @@ class LikePolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    true
   end
 
   def destroy?
-    user == like.fan
+    user.id == like.fan.id
   end
 end
