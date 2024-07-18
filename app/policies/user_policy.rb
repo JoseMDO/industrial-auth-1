@@ -1,10 +1,10 @@
 class UserPolicy < ApplicationPolicy
-  attr_reader :current_user, :user
+  attr_reader :user, :user_instance
 
 
-  def initialize(current_user, user)
-    @current_user = current_user
+  def initialize(user, user_instance)
     @user = user
+    @user_instance = user_instance
   end
 
   def show?
@@ -20,9 +20,9 @@ class UserPolicy < ApplicationPolicy
   end
 
   def liked?
-    user == current_user ||
-    !user.private? || 
-    user.followers.include?(current_user)
+    user == user_instance || 
+    !user_instance.private? || 
+    user_instance.followers.include?(user)
   end
 
 end
